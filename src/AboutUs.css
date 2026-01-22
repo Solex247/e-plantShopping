@@ -1,33 +1,43 @@
 .about-us-container {
-    width: 1000px;
-    /* margin: 0 auto; */
-    /* padding: 20px; */
-    /* background-color: red; */
+    /* Changed width from 1000px to 100% and added max-width */
+    width: 100%;
+    max-width: 800px; 
+    margin: 0 auto;
+    padding: 20px;
     text-align: justify;
-  }
-  
-  .about-us-heading {
+    /* This ensures the container never exceeds its parent (App.css content div) */
+    box-sizing: border-box; 
+}
+
+.about-us-heading {
     font-size: 32px;
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
-  }
-  
-  .about-us-description {
-    font-size: 18px;
-    color: #666;
+    text-align: center;
+}
+
+.about-us-description {
+    font-size: clamp(18px, 2.5vw, 22px); /* Responsive font size */
+    color: #ffffff; /* Adjusted to white to match your landing page theme */
     margin-bottom: 30px;
     text-align: center;
-  }
-  
-  .about-us-content {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-  .plant_logo_right{
-    text-align: right;
-  }
+    font-style: italic;
+    font-weight: bold;
+}
 
-  .plant_logo_left{
-    text-align: left;
-  }
+.about-us-content {
+    font-size: clamp(16px, 2vw, 18px); /* Responsive font size */
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #eeeeee; /* Light grey/white for readability on dark background */
+}
+
+/* Ensure images/logos don't break the layout if you uncomment them later */
+.plant_logo_right, .plant_logo_left {
+    display: block;
+    width: 100%;
+}
+
+.plant_logo_right { text-align: right; }
+.plant_logo_left { text-align: left; }
