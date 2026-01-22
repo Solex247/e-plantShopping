@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import "./ProductList.css";
 import CartItem from "./CartItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "./CartSlice";
 function ProductList({ onHomeClick }) {
+  const cart = useSelector((state) => state.cart.items);
   const [showCart, setShowCart] = useState(false);
   const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
-const [addedToCart, setAddedToCart] = useState({});
+  const [addedToCart, setAddedToCart] = useState({});
+  const isInCart = (plantName) => {
+    return cart.some((item) => item.name === plantName);
+  };
   const plantsArray = [
     {
       category: "Air Purifying Plants",
@@ -269,6 +273,7 @@ const [addedToCart, setAddedToCart] = useState({});
     fontSize: "30px",
     textDecoration: "none",
   };
+  const dispatch = useDispatch();
 
   const handleHomeClick = (e) => {
     e.preventDefault();
@@ -290,14 +295,15 @@ const [addedToCart, setAddedToCart] = useState({});
     setShowCart(false);
   };
   const handleAddToCart = (product) => {
-  dispatch(addItem(product)); // Dispatch the action to add the product to the cart (Redux action)
+    dispatch(addItem(product)); // Dispatch the action to add the product to the cart (Redux action)
 
-  setAddedToCart((prevState) => ({ // Update the local state to reflect that the product has been added
-    ...prevState, // Spread the previous state to retain existing entries
-    [product.name]: true, // Set the current product's name as a key with value 'true' to mark it as added
-  }));
-};
-  
+    setAddedToCart((prevState) => ({
+      // Update the local state to reflect that the product has been added
+      ...prevState, // Spread the previous state to retain existing entries
+      [product.name]: true, // Set the current product's name as a key with value 'true' to mark it as added
+    }));
+  };
+
   return (
     <div>
       <div className="navbar" style={styleObj}>
@@ -391,10 +397,13 @@ const [addedToCart, setAddedToCart] = useState({});
                         <div className="product-cost">${plant.cost}</div>{" "}
                         {/* Display plant cost */}
                         <button
-                          className="product-button"
-                          onClick={() => handleAddToCart(plant)} // Handle adding plant to cart
+                          className={`product-button ${isInCart(plant.name) ? "added-to-cart" : ""}`}
+                          disabled={isInCart(plant.name)}
+                          onClick={() => handleAddToCart(plant)}
                         >
-                          Add to Cart
+                          {isInCart(plant.name)
+                            ? "Added to Cart"
+                            : "Add to Cart"}
                         </button>
                       </div>
                     ),

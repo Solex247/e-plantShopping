@@ -209,15 +209,27 @@ body {
     margin: 4px 2px;
     transition-duration: 0.4s;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
   }
   
   .product-button:hover {
     background-color: #45a049;
   }
   
-  .product-button.added-to-cart {
-    background-color: grey; /* Grey when product is added */
-  }
+ /* Update your existing CSS block to this */
+.product-button.added-to-cart {
+    background-color: grey !important;
+  color: #eeeeee;
+  cursor: not-allowed;
+  /* Optional: remove the hover lift effect for added items */
+  transform: none !important;
+}
+
+/* Also ensure the hover doesn't turn it green again once disabled */
+.product-button.added-to-cart:hover {
+    background-color: grey !important;
+} /* Grey when product is added */
+  
   @media (max-width: 1200px) {
     .product-card {
       flex: 1 1 calc(33.33% - 20px); /* Adjust width for 3 cards per row with 20px gap on medium screens */
