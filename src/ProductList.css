@@ -12,20 +12,22 @@ body {
 
 /* Navbar */
 .navbar {
-    background-color: #4CAF50;
-    color: #fff!important;
-    padding: 15px;
+   background-color: #4CAF50;
+    color: #fff;
+    padding: 15px 30px; /* Added horizontal padding */
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* This pushes Logo to left and UL to right */
     align-items: center;
-    font-size: 20px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .navbar .ul {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end; /* This pushes the children (Plants and Cart) to the right */
     align-items: center;
-    width: 1100px;
+    gap: 50px; /* Space between 'Plants' and 'Cart' */
+    flex-grow: 1; /* Allows the container to take up the remaining space */
 }
 
 .navbar li {
@@ -162,7 +164,23 @@ body {
 }
 .cart{
     color: white;
-    display: flex;
+transition: transform 0.3s ease; /* Smoothly animate size changes */
+  cursor: pointer;
+  display: flex;
+  position: relative;    
+}
+
+.cart:hover {
+  transform: scale(1.1);
+}
+
+.cart:hover svg {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.6));
+}
+
+.cart:hover .cart_quantity_count {
+  background-color: #ff3333; /* Slightly brighter red */
+  box-shadow: 0 0 10px rgba(255, 77, 77, 0.8);
 }
 .cart_quantity_count{
     margin-top: 16px;
